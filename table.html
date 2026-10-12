@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список лучших книг — Каталог и статистика</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <p>
+                <a href="index.html">Книги</a><br>
+                <a href="book.html">Мастер и Маргарита</a><br>
+                <a href="table.html">Список лучших книг</a>
+            </p>
+        </nav>
+        <hr width="100%">
+    </header>
+
+    <main>
+        <section>
+            <details open>
+                <summary>График</summary>
+                <form action="table.html" method="get">
+                    <fieldset>
+                        <legend>Параметры графика</legend>
+                        <p>Значение по оси OX:</p>
+                        <p>
+                            <input type="radio" id="ox_genre" name="axis_ox" value="genre" checked>
+                            <label for="ox_genre">Жанр</label><br>
+                            <input type="radio" id="ox_lang" name="axis_ox" value="language">
+                            <label for="ox_lang">Язык оригинала</label><br>
+                            <input type="radio" id="ox_year" name="axis_ox" value="year">
+                            <label for="ox_year">Год написания</label>
+                        </p>
+
+                        <p>Значение по оси OY:</p>
+                        <p>
+                            <input type="checkbox" id="oy_max_rating" name="axis_oy" value="max_rating" checked>
+                            <label for="oy_max_rating">Максимальный рейтинг</label><br>
+                            <input type="checkbox" id="oy_avg_rating" name="axis_oy" value="avg_rating">
+                            <label for="oy_avg_rating">Средний рейтинг</label><br>
+                            <input type="checkbox" id="oy_sales" name="axis_oy" value="sales">
+                            <label for="oy_sales">Суммарный тираж (млн)</label><br>
+                            <input type="checkbox" id="oy_count" name="axis_oy" value="count">
+                            <label for="oy_count">Количество книг</label>
+                        </p>
+
+                        <p>
+                            <input type="submit" value="Построить">
+                        </p>
+
+                        <p>Здесь будет график</p>
+                    </fieldset>
+                </form>
+            </details>
+            <br>
+
+            <details>
+                <summary>Фильтр</summary>
+                <form action="table.html" method="get">
+                    <fieldset>
+                        <legend>Параметры фильтра</legend>
+                        <p>
+                            <label for="f_title">Название: </label>
+                            <input type="text" id="f_title" name="filter_title" size="30">
+                        </p>
+                        <p>
+                            <label for="f_author">Автор: </label>
+                            <input type="text" id="f_author" name="filter_author" size="30">
+                        </p>
+                        <p>
+                            <label for="f_genre">Жанр: </label>
+                            <select id="f_genre" name="filter_genre">
+                                <option value="">(Все)</option>
+                                <option value="novel">Роман</option>
+                                <option value="fantasy">Фэнтези</option>
+                                <option value="sci_fi">Фантастика</option>
+                                <option value="dystopia">Антиутопия</option>
+                                <option value="detective">Детектив</option>
+                                <option value="adventure">Приключения</option>
+                                <option value="horror">Хоррор</option>
+                                <option value="tale">Сказка / Повесть</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="f_lang">Язык оригинала: </label>
+                            <select id="f_lang" name="filter_lang">
+                                <option value="">(Все)</option>
+                                <option value="ru">Русский</option>
+                                <option value="en">Английский</option>
+                                <option value="fr">Французский</option>
+                                <option value="de">Немецкий</option>
+                                <option value="es">Испанский</option>
+                                <option value="it">Итальянский</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="f_year_from">Год: от </label>
+                            <input type="number" id="f_year_from" name="filter_year_from" min="1800" max="2026">
+                            <label for="f_year_to"> до </label>
+                            <input type="number" id="f_year_to" name="filter_year_to" min="1800" max="2026">
+                        </p>
+                        <p>
+                            <label for="f_rating_from">Рейтинг: от </label>
+                            <input type="number" id="f_rating_from" name="filter_rating_from" min="0" max="10" step="0.1">
+                            <label for="f_rating_to"> до </label>
+                            <input type="number" id="f_rating_to" name="filter_rating_to" min="0" max="10" step="0.1">
+                        </p>
+                        <p>
+                            <label for="f_pages_from">Страниц: от </label>
+                            <input type="number" id="f_pages_from" name="filter_pages_from" min="10" max="3000">
+                            <label for="f_pages_to"> до </label>
+                            <input type="number" id="f_pages_to" name="filter_pages_to" min="10" max="3000">
+                        </p>
+                        <p>
+                            <label for="f_sales_from">Тираж (млн): от </label>
+                            <input type="number" id="f_sales_from" name="filter_sales_from" min="0" max="500" step="0.5">
+                            <label for="f_sales_to"> до </label>
+                            <input type="number" id="f_sales_to" name="filter_sales_to" min="0" max="500" step="0.5">
+                        </p>
+                        <p>
+                            <input type="submit" value="Найти">
+                            <input type="reset" value="Сбросить">
+                        </p>
+                    </fieldset>
+                </form>
+            </details>
+            <br>
+
+            <details>
+                <summary>Сортировка</summary>
+                <form action="table.html" method="get">
+                    <fieldset>
+                        <legend>Параметры сортировки</legend>
+                        <p>
+                            <label for="s_lvl1">Первый уровень: </label>
+                            <select id="s_lvl1" name="sort_level_1">
+                                <option value="none">Нет</option>
+                                <option value="title">Название</option>
+                                <option value="author">Автор</option>
+                                <option value="genre">Жанр</option>
+                                <option value="lang">Язык</option>
+                                <option value="year">Год</option>
+                                <option value="rating">Рейтинг</option>
+                                <option value="pages">Страницы</option>
+                                <option value="sales">Тираж</option>
+                            </select>
+                            <input type="checkbox" id="s_desc1" name="sort_desc_1" value="1">
+                            <label for="s_desc1">по убыванию?</label>
+                        </p>
+
+                        <p>
+                            <label for="s_lvl2">Второй уровень: </label>
+                            <select id="s_lvl2" name="sort_level_2">
+                                <option value="none">Нет</option>
+                                <option value="title">Название</option>
+                                <option value="author">Автор</option>
+                                <option value="genre">Жанр</option>
+                                <option value="lang">Язык</option>
+                                <option value="year">Год</option>
+                                <option value="rating">Рейтинг</option>
+                                <option value="pages">Страницы</option>
+                                <option value="sales">Тираж</option>
+                            </select>
+                            <input type="checkbox" id="s_desc2" name="sort_desc_2" value="1">
+                            <label for="s_desc2">по убыванию?</label>
+                        </p>
+
+                        <p>
+                            <label for="s_lvl3">Третий уровень: </label>
+                            <select id="s_lvl3" name="sort_level_3">
+                                <option value="none">Нет</option>
+                                <option value="title">Название</option>
+                                <option value="author">Автор</option>
+                                <option value="genre">Жанр</option>
+                                <option value="lang">Язык</option>
+                                <option value="year">Год</option>
+                                <option value="rating">Рейтинг</option>
+                                <option value="pages">Страницы</option>
+                                <option value="sales">Тираж</option>
+                            </select>
+                            <input type="checkbox" id="s_desc3" name="sort_desc_3" value="1">
+                            <label for="s_desc3">по убыванию?</label>
+                        </p>
+
+                        <p>
+                            <input type="submit" value="Сортировать">
+                        </p>
+                    </fieldset>
+                </form>
+            </details>
+            <br>
+        </section>
+
+        <section>
+            <hr width="100%">
+            <h1 align="center">Список книг</h1>
+
+            <table border="1" align="center">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Автор</th>
+                        <th>Жанр</th>
+                        <th>Язык</th>
+                        <th>Год</th>
+                        <th>Рейтинг</th>
+                        <th>Страниц</th>
+                        <th>Тираж (млн)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Мастер и Маргарита</td>
+                        <td>Михаил Булгаков</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1967</td>
+                        <td>9.4</td>
+                        <td>480</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>1984</td>
+                        <td>Джордж Оруэлл</td>
+                        <td>Антиутопия</td>
+                        <td>Английский</td>
+                        <td>1949</td>
+                        <td>9.2</td>
+                        <td>328</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Великий Гэтсби</td>
+                        <td>Фрэнсис Скотт Фицджеральд</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1925</td>
+                        <td>8.8</td>
+                        <td>218</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Преступление и наказание</td>
+                        <td>Фёдор Достоевский</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1866</td>
+                        <td>9.3</td>
+                        <td>576</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Война и мир</td>
+                        <td>Лев Толстой</td>
+                        <td>Роман-эпопея</td>
+                        <td>Русский</td>
+                        <td>1869</td>
+                        <td>9.1</td>
+                        <td>1300</td>
+                        <td>36.0</td>
+                    </tr>
+                    <tr>
+                        <td>Маленький принц</td>
+                        <td>Антуан де Сент-Экзюпери</td>
+                        <td>Сказка</td>
+                        <td>Французский</td>
+                        <td>1943</td>
+                        <td>9.5</td>
+                        <td>96</td>
+                        <td>140.0</td>
+                    </tr>
+                    <tr>
+                        <td>Хоббит, или Туда и обратно</td>
+                        <td>Джон Р. Р. Толкин</td>
+                        <td>Фэнтези</td>
+                        <td>Английский</td>
+                        <td>1937</td>
+                        <td>9.3</td>
+                        <td>310</td>
+                        <td>100.0</td>
+                    </tr>
+                    <tr>
+                        <td>Властелин колец</td>
+                        <td>Джон Р. Р. Толкин</td>
+                        <td>Фэнтези</td>
+                        <td>Английский</td>
+                        <td>1954</td>
+                        <td>9.6</td>
+                        <td>1178</td>
+                        <td>150.0</td>
+                    </tr>
+                    <tr>
+                        <td>Гарри Поттер и философский камень</td>
+                        <td>Джоан Роулинг</td>
+                        <td>Фэнтези</td>
+                        <td>Английский</td>
+                        <td>1997</td>
+                        <td>9.2</td>
+                        <td>332</td>
+                        <td>120.0</td>
+                    </tr>
+                    <tr>
+                        <td>Убить пересмешника</td>
+                        <td>Харпер Ли</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1960</td>
+                        <td>9.1</td>
+                        <td>384</td>
+                        <td>40.0</td>
+                    </tr>
+                    <tr>
+                        <td>Сто лет одиночества</td>
+                        <td>Габриэль Гарсиа Маркес</td>
+                        <td>Роман</td>
+                        <td>Испанский</td>
+                        <td>1967</td>
+                        <td>9.0</td>
+                        <td>416</td>
+                        <td>50.0</td>
+                    </tr>
+                    <tr>
+                        <td>Гордость и предубеждение</td>
+                        <td>Джейн Остин</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1813</td>
+                        <td>9.0</td>
+                        <td>432</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>О дивный новый мир</td>
+                        <td>Олдос Хаксли</td>
+                        <td>Антиутопия</td>
+                        <td>Английский</td>
+                        <td>1932</td>
+                        <td>8.9</td>
+                        <td>288</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>451 градус по Фаренгейту</td>
+                        <td>Рэй Брэдбери</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1953</td>
+                        <td>9.0</td>
+                        <td>256</td>
+                        <td>10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Над пропастью во ржи</td>
+                        <td>Джером Д. Сэлинджер</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1951</td>
+                        <td>8.4</td>
+                        <td>272</td>
+                        <td>65.0</td>
+                    </tr>
+                    <tr>
+                        <td>Анна Каренина</td>
+                        <td>Лев Толстой</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1877</td>
+                        <td>9.0</td>
+                        <td>864</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Братья Карамазовы</td>
+                        <td>Фёдор Достоевский</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1880</td>
+                        <td>9.4</td>
+                        <td>840</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Идиот</td>
+                        <td>Фёдор Достоевский</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1869</td>
+                        <td>9.1</td>
+                        <td>640</td>
+                        <td>16.0</td>
+                    </tr>
+                    <tr>
+                        <td>Евгений Онегин</td>
+                        <td>Александр Пушкин</td>
+                        <td>Поэма</td>
+                        <td>Русский</td>
+                        <td>1833</td>
+                        <td>9.3</td>
+                        <td>224</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Герой нашего времени</td>
+                        <td>Михаил Лермонтов</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1840</td>
+                        <td>9.0</td>
+                        <td>224</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Мёртвые души</td>
+                        <td>Николай Гоголь</td>
+                        <td>Поэма</td>
+                        <td>Русский</td>
+                        <td>1842</td>
+                        <td>8.9</td>
+                        <td>352</td>
+                        <td>14.0</td>
+                    </tr>
+                    <tr>
+                        <td>Ревизор</td>
+                        <td>Николай Гоголь</td>
+                        <td>Драма</td>
+                        <td>Русский</td>
+                        <td>1836</td>
+                        <td>8.8</td>
+                        <td>128</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Отцы и дети</td>
+                        <td>Иван Тургенев</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1862</td>
+                        <td>8.7</td>
+                        <td>288</td>
+                        <td>10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Собачье сердце</td>
+                        <td>Михаил Булгаков</td>
+                        <td>Повесть</td>
+                        <td>Русский</td>
+                        <td>1925</td>
+                        <td>9.4</td>
+                        <td>160</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Белая гвардия</td>
+                        <td>Михаил Булгаков</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1925</td>
+                        <td>8.8</td>
+                        <td>384</td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Доктор Живаго</td>
+                        <td>Борис Пастернак</td>
+                        <td>Роман</td>
+                        <td>Русский</td>
+                        <td>1957</td>
+                        <td>8.7</td>
+                        <td>592</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Тихий Дон</td>
+                        <td>Михаил Шолохов</td>
+                        <td>Роман-эпопея</td>
+                        <td>Русский</td>
+                        <td>1940</td>
+                        <td>9.1</td>
+                        <td>1400</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Двенадцать стульев</td>
+                        <td>Илья Ильф, Евгений Петров</td>
+                        <td>Сатира</td>
+                        <td>Русский</td>
+                        <td>1928</td>
+                        <td>9.3</td>
+                        <td>416</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Золотой телёнок</td>
+                        <td>Илья Ильф, Евгений Петров</td>
+                        <td>Сатира</td>
+                        <td>Русский</td>
+                        <td>1931</td>
+                        <td>9.2</td>
+                        <td>400</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Пикник на обочине</td>
+                        <td>Аркадий и Борис Стругацкие</td>
+                        <td>Фантастика</td>
+                        <td>Русский</td>
+                        <td>1972</td>
+                        <td>9.2</td>
+                        <td>256</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Трудно быть богом</td>
+                        <td>Аркадий и Борис Стругацкие</td>
+                        <td>Фантастика</td>
+                        <td>Русский</td>
+                        <td>1964</td>
+                        <td>9.1</td>
+                        <td>240</td>
+                        <td>10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Понедельник начинается в субботу</td>
+                        <td>Аркадий и Борис Стругацкие</td>
+                        <td>Фантастика</td>
+                        <td>Русский</td>
+                        <td>1965</td>
+                        <td>9.3</td>
+                        <td>288</td>
+                        <td>11.0</td>
+                    </tr>
+                    <tr>
+                        <td>Мы</td>
+                        <td>Евгений Замятин</td>
+                        <td>Антиутопия</td>
+                        <td>Русский</td>
+                        <td>1924</td>
+                        <td>8.7</td>
+                        <td>224</td>
+                        <td>6.0</td>
+                    </tr>
+                    <tr>
+                        <td>Фауст</td>
+                        <td>Иоганн Вольфганг Гёте</td>
+                        <td>Трагедия</td>
+                        <td>Немецкий</td>
+                        <td>1808</td>
+                        <td>9.2</td>
+                        <td>448</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Три товарища</td>
+                        <td>Эрих Мария Ремарк</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1936</td>
+                        <td>9.3</td>
+                        <td>480</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>На Западном фронте без перемен</td>
+                        <td>Эрих Мария Ремарк</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1929</td>
+                        <td>9.2</td>
+                        <td>288</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Триумфальная арка</td>
+                        <td>Эрих Мария Ремарк</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1945</td>
+                        <td>9.0</td>
+                        <td>512</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Превращение</td>
+                        <td>Франц Кафка</td>
+                        <td>Повесть</td>
+                        <td>Немецкий</td>
+                        <td>1915</td>
+                        <td>8.8</td>
+                        <td>96</td>
+                        <td>10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Процесс</td>
+                        <td>Франц Кафка</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1925</td>
+                        <td>8.7</td>
+                        <td>304</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Степной волк</td>
+                        <td>Герман Гессе</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1927</td>
+                        <td>8.9</td>
+                        <td>288</td>
+                        <td>14.0</td>
+                    </tr>
+                    <tr>
+                        <td>Игра в бисер</td>
+                        <td>Герман Гессе</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1943</td>
+                        <td>8.8</td>
+                        <td>544</td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Парфюмер</td>
+                        <td>Патрик Зюскинд</td>
+                        <td>Роман</td>
+                        <td>Немецкий</td>
+                        <td>1985</td>
+                        <td>8.9</td>
+                        <td>320</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Граф Монте-Кристо</td>
+                        <td>Александр Дюма</td>
+                        <td>Приключения</td>
+                        <td>Французский</td>
+                        <td>1844</td>
+                        <td>9.4</td>
+                        <td>1200</td>
+                        <td>45.0</td>
+                    </tr>
+                    <tr>
+                        <td>Три мушкетёра</td>
+                        <td>Александр Дюма</td>
+                        <td>Приключения</td>
+                        <td>Французский</td>
+                        <td>1844</td>
+                        <td>9.2</td>
+                        <td>704</td>
+                        <td>40.0</td>
+                    </tr>
+                    <tr>
+                        <td>Отверженные</td>
+                        <td>Виктор Гюго</td>
+                        <td>Роман</td>
+                        <td>Французский</td>
+                        <td>1862</td>
+                        <td>9.3</td>
+                        <td>1400</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Собор Парижской Богоматери</td>
+                        <td>Виктор Гюго</td>
+                        <td>Роман</td>
+                        <td>Французский</td>
+                        <td>1831</td>
+                        <td>9.1</td>
+                        <td>560</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Красное и чёрное</td>
+                        <td>Стендаль</td>
+                        <td>Роман</td>
+                        <td>Французский</td>
+                        <td>1830</td>
+                        <td>8.7</td>
+                        <td>576</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Мадам Бовари</td>
+                        <td>Гюстав Флобер</td>
+                        <td>Роман</td>
+                        <td>Французский</td>
+                        <td>1856</td>
+                        <td>8.6</td>
+                        <td>448</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Посторонний</td>
+                        <td>Альбер Камю</td>
+                        <td>Повесть</td>
+                        <td>Французский</td>
+                        <td>1942</td>
+                        <td>8.9</td>
+                        <td>160</td>
+                        <td>14.0</td>
+                    </tr>
+                    <tr>
+                        <td>Чума</td>
+                        <td>Альбер Камю</td>
+                        <td>Роман</td>
+                        <td>Французский</td>
+                        <td>1947</td>
+                        <td>9.0</td>
+                        <td>352</td>
+                        <td>16.0</td>
+                    </tr>
+                    <tr>
+                        <td>Дюна</td>
+                        <td>Фрэнк Герберт</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1965</td>
+                        <td>9.3</td>
+                        <td>688</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Автостопом по галактике</td>
+                        <td>Дуглас Адамс</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1979</td>
+                        <td>9.1</td>
+                        <td>224</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Основание</td>
+                        <td>Айзек Азимов</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1951</td>
+                        <td>9.0</td>
+                        <td>256</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Солярис</td>
+                        <td>Станислав Лем</td>
+                        <td>Фантастика</td>
+                        <td>Польский</td>
+                        <td>1961</td>
+                        <td>9.0</td>
+                        <td>288</td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Цветы для Элджернона</td>
+                        <td>Дэниел Киз</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1966</td>
+                        <td>9.4</td>
+                        <td>320</td>
+                        <td>10.0</td>
+                    </tr>
+                    <tr>
+                        <td>Марсианские хроники</td>
+                        <td>Рэй Брэдбери</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1950</td>
+                        <td>9.0</td>
+                        <td>320</td>
+                        <td>8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Старик и море</td>
+                        <td>Эрнест Хемингуэй</td>
+                        <td>Повесть</td>
+                        <td>Английский</td>
+                        <td>1952</td>
+                        <td>8.8</td>
+                        <td>128</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>По ком звонит колокол</td>
+                        <td>Эрнест Хемингуэй</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1940</td>
+                        <td>8.9</td>
+                        <td>544</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Прощай, оружие!</td>
+                        <td>Эрнест Хемингуэй</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1929</td>
+                        <td>8.7</td>
+                        <td>384</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Шерлок Холмс: Этюд в багровых тонах</td>
+                        <td>Артур Конан Дойл</td>
+                        <td>Детектив</td>
+                        <td>Английский</td>
+                        <td>1887</td>
+                        <td>9.2</td>
+                        <td>192</td>
+                        <td>35.0</td>
+                    </tr>
+                    <tr>
+                        <td>Собака Баскервилей</td>
+                        <td>Артур Конан Дойл</td>
+                        <td>Детектив</td>
+                        <td>Английский</td>
+                        <td>1902</td>
+                        <td>9.3</td>
+                        <td>256</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Десять негритят</td>
+                        <td>Агата Кристи</td>
+                        <td>Детектив</td>
+                        <td>Английский</td>
+                        <td>1939</td>
+                        <td>9.3</td>
+                        <td>256</td>
+                        <td>100.0</td>
+                    </tr>
+                    <tr>
+                        <td>Убийство в Восточном экспрессе</td>
+                        <td>Агата Кристи</td>
+                        <td>Детектив</td>
+                        <td>Английский</td>
+                        <td>1934</td>
+                        <td>9.1</td>
+                        <td>288</td>
+                        <td>40.0</td>
+                    </tr>
+                    <tr>
+                        <td>Портрет Дориана Грея</td>
+                        <td>Оскар Уайльд</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1890</td>
+                        <td>9.1</td>
+                        <td>320</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Джейн Эйр</td>
+                        <td>Шарлотта Бронте</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1847</td>
+                        <td>9.0</td>
+                        <td>576</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Грозовой перевал</td>
+                        <td>Эмили Бронте</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1847</td>
+                        <td>8.8</td>
+                        <td>416</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Приключения Тома Сойера</td>
+                        <td>Марк Твен</td>
+                        <td>Приключения</td>
+                        <td>Английский</td>
+                        <td>1876</td>
+                        <td>9.0</td>
+                        <td>272</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Приключения Гекльберри Финна</td>
+                        <td>Марк Твен</td>
+                        <td>Приключения</td>
+                        <td>Английский</td>
+                        <td>1884</td>
+                        <td>9.0</td>
+                        <td>368</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Остров сокровищ</td>
+                        <td>Роберт Льюис Стивенсон</td>
+                        <td>Приключения</td>
+                        <td>Английский</td>
+                        <td>1883</td>
+                        <td>9.1</td>
+                        <td>288</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Странная история доктора Джекила и мистера Хайда</td>
+                        <td>Роберт Льюис Стивенсон</td>
+                        <td>Повесть</td>
+                        <td>Английский</td>
+                        <td>1886</td>
+                        <td>8.8</td>
+                        <td>144</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Моби Дик, или Белый кит</td>
+                        <td>Герман Мелвилл</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1851</td>
+                        <td>8.6</td>
+                        <td>672</td>
+                        <td>15.0</td>
+                    </tr>
+                    <tr>
+                        <td>Франкенштейн</td>
+                        <td>Мэри Шелли</td>
+                        <td>Фантастика</td>
+                        <td>Английский</td>
+                        <td>1818</td>
+                        <td>8.8</td>
+                        <td>288</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Дракула</td>
+                        <td>Брэм Стокер</td>
+                        <td>Хоррор</td>
+                        <td>Английский</td>
+                        <td>1897</td>
+                        <td>8.9</td>
+                        <td>448</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Сияние</td>
+                        <td>Стивен Кинг</td>
+                        <td>Хоррор</td>
+                        <td>Английский</td>
+                        <td>1977</td>
+                        <td>9.1</td>
+                        <td>544</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>Оно</td>
+                        <td>Стивен Кинг</td>
+                        <td>Хоррор</td>
+                        <td>Английский</td>
+                        <td>1986</td>
+                        <td>9.0</td>
+                        <td>1138</td>
+                        <td>20.0</td>
+                    </tr>
+                    <tr>
+                        <td>Зелёная миля</td>
+                        <td>Стивен Кинг</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1996</td>
+                        <td>9.5</td>
+                        <td>448</td>
+                        <td>22.0</td>
+                    </tr>
+                    <tr>
+                        <td>Побег из Шоушенка</td>
+                        <td>Стивен Кинг</td>
+                        <td>Повесть</td>
+                        <td>Английский</td>
+                        <td>1982</td>
+                        <td>9.4</td>
+                        <td>160</td>
+                        <td>18.0</td>
+                    </tr>
+                    <tr>
+                        <td>Бойцовский клуб</td>
+                        <td>Чак Паланик</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1996</td>
+                        <td>8.9</td>
+                        <td>256</td>
+                        <td>12.0</td>
+                    </tr>
+                    <tr>
+                        <td>Крёстный отец</td>
+                        <td>Марио Пьюзо</td>
+                        <td>Роман</td>
+                        <td>Английский</td>
+                        <td>1969</td>
+                        <td>9.3</td>
+                        <td>544</td>
+                        <td>30.0</td>
+                    </tr>
+                    <tr>
+                        <td>Имя розы</td>
+                        <td>Умберто Эко</td>
+                        <td>Детектив</td>
+                        <td>Итальянский</td>
+                        <td>1980</td>
+                        <td>9.1</td>
+                        <td>640</td>
+                        <td>15.0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </section>
+    </main>
+
+    <footer>
+        <p align="center">Разработчик: Тарабыкин Гордей | Группа: Б9124-09.03.04</p>
+    </footer>
+
+</body>
+</html>
