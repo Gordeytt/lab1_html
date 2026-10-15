@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Список лучших книг — Каталог и статистика</title>
+    <title>Список лучших книг - Каталог и статистика</title>
 </head>
 <body>
 
@@ -36,18 +36,14 @@
 
                         <p>Значение по оси OY:</p>
                         <p>
-                            <input type="checkbox" id="oy_max_rating" name="axis_oy" value="max_rating" checked>
+                            <input type="radio" id="oy_max_rating" name="axis_oy" value="max_rating" checked>
                             <label for="oy_max_rating">Максимальный рейтинг</label><br>
-                            <input type="checkbox" id="oy_avg_rating" name="axis_oy" value="avg_rating">
-                            <label for="oy_avg_rating">Средний рейтинг</label><br>
-                            <input type="checkbox" id="oy_sales" name="axis_oy" value="sales">
-                            <label for="oy_sales">Суммарный тираж (млн)</label><br>
-                            <input type="checkbox" id="oy_count" name="axis_oy" value="count">
-                            <label for="oy_count">Количество книг</label>
+                            <input type="radio" id="oy_avg_rating" name="axis_oy" value="min_rating">
+                            <label for="oy_avg_rating">Минимальный рейтинг</label><br>
                         </p>
 
                         <p>
-                            <input type="submit" value="Построить">
+                            <input type="button" value="Построить">
                         </p>
 
                         <p>Здесь будет график</p>
@@ -72,7 +68,7 @@
                         <p>
                             <label for="f_genre">Жанр: </label>
                             <select id="f_genre" name="filter_genre">
-                                <option value="">(Все)</option>
+                                <option value="">Все</option>
                                 <option value="novel">Роман</option>
                                 <option value="fantasy">Фэнтези</option>
                                 <option value="sci_fi">Фантастика</option>
@@ -80,13 +76,13 @@
                                 <option value="detective">Детектив</option>
                                 <option value="adventure">Приключения</option>
                                 <option value="horror">Хоррор</option>
-                                <option value="tale">Сказка / Повесть</option>
+                                <option value="tale">Сказка или Повесть</option>
                             </select>
                         </p>
                         <p>
                             <label for="f_lang">Язык оригинала: </label>
                             <select id="f_lang" name="filter_lang">
-                                <option value="">(Все)</option>
+                                <option value="">Все</option>
                                 <option value="ru">Русский</option>
                                 <option value="en">Английский</option>
                                 <option value="fr">Французский</option>
@@ -114,13 +110,13 @@
                             <input type="number" id="f_pages_to" name="filter_pages_to" min="10" max="3000">
                         </p>
                         <p>
-                            <label for="f_sales_from">Тираж (млн): от </label>
+                            <label for="f_sales_from">Тираж: от </label>
                             <input type="number" id="f_sales_from" name="filter_sales_from" min="0" max="500" step="0.5">
                             <label for="f_sales_to"> до </label>
                             <input type="number" id="f_sales_to" name="filter_sales_to" min="0" max="500" step="0.5">
                         </p>
                         <p>
-                            <input type="submit" value="Найти">
+                            <input type="button" value="Найти">
                             <input type="reset" value="Сбросить">
                         </p>
                     </fieldset>
@@ -207,7 +203,7 @@
                         <th>Год</th>
                         <th>Рейтинг</th>
                         <th>Страниц</th>
-                        <th>Тираж (млн)</th>
+                        <th>Тираж </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1018,7 +1014,7 @@
     </main>
 
     <footer>
-        <p align="center">Разработчик: Тарабыкин Гордей | Группа: Б9124-09.03.04</p>
+        <p align="center">Разработчик: Тарабыкин Гордей Группа: Б9124-09.03.04</p>
     </footer>
 
 </body>
